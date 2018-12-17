@@ -9,21 +9,30 @@ class Requests extends Component {
   render() {
     return (
       <RequestsContext.Consumer>
-        {requests => (
+        {({ requests, upvote }) => (
           <ul>
-            {requests.map(({ id, title, artist, upvotes, played }) => {
-              return (
-                <li key={id}>
-                  <strong>
-                    {title} - {artist}
-                  </strong>
-                  <ul>
-                    <li>{upvotes}</li>
-                    <li>{played}</li>
-                  </ul>
-                </li>
-              );
-            })}
+            {requests &&
+              requests
+                .sort((a, b) => b.upvotes - a.upvotes)
+                .map(({ id, title, artist, upvotes, played }) => {
+                  return (
+                    <li key={id}>
+                      <strong>
+                        {title} - {artist}
+                      </strong>
+                      <ul>
+                        <li>
+                          {upvotes} -{" "}
+                          <button onClick={() => upvote(id, ++upvotes)}>
+                            {" "}
+                            ↑{" "}
+                          </button>
+                        </li>
+                        <li>{played}</li>
+                      </ul>
+                    </li>
+                  );
+                })}
           </ul>
         )}
       </RequestsContext.Consumer>
