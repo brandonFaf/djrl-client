@@ -16,7 +16,7 @@ export const addRequest = req => {
       artist: breakdown[1].trim(),
       upvotes: 0,
       played: false,
-      time_add: firebase.firestore.FieldValue.serverTimestamp()
+      time_added: firebase.firestore.FieldValue.serverTimestamp()
     });
 };
 
