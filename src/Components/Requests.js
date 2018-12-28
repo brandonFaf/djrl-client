@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { RequestsContext } from "../Contexts/RequestsStore";
 class Requests extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+  state = {};
 
   render() {
     return (
@@ -14,25 +11,32 @@ class Requests extends Component {
             {requests &&
               requests
                 .sort((a, b) => b.upvotes - a.upvotes)
-                .map(({ id, title, artist, upvotes, played }) => {
-                  return (
-                    <li key={id}>
-                      <strong>
-                        {title} - {artist}
-                      </strong>
-                      <ul>
-                        <li>
-                          {upvotes} -{" "}
-                          <button onClick={() => upvote(id, ++upvotes)}>
-                            {" "}
-                            ↑{" "}
-                          </button>
-                        </li>
-                        <li>{played}</li>
-                      </ul>
-                    </li>
-                  );
-                })}
+                .map(
+                  ({ id, title, artist, upvotes, played, alreadyUpvoted }) => {
+                    return (
+                      <li key={id}>
+                        <strong>
+                          {title} - {artist}
+                        </strong>
+                        <ul>
+                          <li>
+                            {upvotes}
+                            {!alreadyUpvoted && (
+                              <button
+                                style={{ marginLeft: 10 }}
+                                onClick={() => upvote(id, ++upvotes)}
+                              >
+                                {" "}
+                                ↑{" "}
+                              </button>
+                            )}
+                          </li>
+                          <li>{played}</li>
+                        </ul>
+                      </li>
+                    );
+                  }
+                )}
           </ul>
         )}
       </RequestsContext.Consumer>

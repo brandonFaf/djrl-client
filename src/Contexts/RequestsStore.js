@@ -34,6 +34,24 @@ class RequestStore extends Component {
       .doc(id)
       .update({
         upvotes
+      })
+      .then(() => {
+        const userUpvotes =
+          JSON.parse(localStorage.getItem(new Date().toDateString())) || [];
+        userUpvotes.push(id);
+        localStorage.setItem(
+          new Date().toDateString(),
+          JSON.stringify(userUpvotes)
+        );
+        let requests = this.state.requests.map(x => {
+          if (x.id === id) {
+            x.alreadyUpvoted = true;
+          }
+          return x;
+        });
+        this.setState({
+          requests
+        });
       });
   };
   render() {
