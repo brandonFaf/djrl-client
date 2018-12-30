@@ -30,15 +30,14 @@ const runReducer = (requests, change, userUpvotes) => {
       return null;
   }
 };
-export const addRequest = req => {
-  const breakdown = req.split("-");
+export const addRequest = (title, artist) => {
   return db
     .collection("Parties")
     .doc("hAlXTRnQLhPphs5OUsQ6")
     .collection("Requests")
     .add({
-      title: breakdown[0].trim(),
-      artist: breakdown[1].trim(),
+      title,
+      artist,
       upvotes: 0,
       played: false,
       alreadyUpvoted: true,

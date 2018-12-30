@@ -5,41 +5,57 @@ class Requests extends Component {
 
   render() {
     return (
-      <RequestsContext.Consumer>
-        {({ requests, upvote }) => (
-          <ul>
-            {requests &&
-              requests
-                .sort((a, b) => b.upvotes - a.upvotes)
-                .map(
-                  ({ id, title, artist, upvotes, played, alreadyUpvoted }) => {
-                    return (
-                      <li key={id}>
-                        <strong>
-                          {title} - {artist}
-                        </strong>
-                        <ul>
-                          <li>
-                            {upvotes}
-                            {!alreadyUpvoted && (
-                              <button
-                                style={{ marginLeft: 10 }}
-                                onClick={() => upvote(id, ++upvotes)}
-                              >
-                                {" "}
-                                ↑{" "}
-                              </button>
-                            )}
-                          </li>
-                          <li>{played}</li>
-                        </ul>
-                      </li>
-                    );
-                  }
-                )}
-          </ul>
-        )}
-      </RequestsContext.Consumer>
+      <div>
+        <div>
+          <input
+            type="text"
+            onFocus={() => this.props.toggleSearch()}
+            ref={this.songRef}
+          />
+        </div>
+        <RequestsContext.Consumer>
+          {({ requests, upvote }) => (
+            <ul>
+              {requests &&
+                requests
+                  .sort((a, b) => b.upvotes - a.upvotes)
+                  .map(
+                    ({
+                      id,
+                      title,
+                      artist,
+                      upvotes,
+                      played,
+                      alreadyUpvoted
+                    }) => {
+                      return (
+                        <li key={id}>
+                          <strong>
+                            {title} - {artist}
+                          </strong>
+                          <ul>
+                            <li>
+                              {upvotes}
+                              {!alreadyUpvoted && (
+                                <button
+                                  style={{ marginLeft: 10 }}
+                                  onClick={() => upvote(id, ++upvotes)}
+                                >
+                                  {" "}
+                                  ↑{" "}
+                                </button>
+                              )}
+                            </li>
+                            <li>{played}</li>
+                          </ul>
+                        </li>
+                      );
+                    }
+                  )}
+            </ul>
+          )}
+        </RequestsContext.Consumer>
+      </div>
     );
   }
 }
