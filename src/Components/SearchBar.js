@@ -16,7 +16,7 @@ class SearchBar extends Component {
     }
     if (value.length > 2) {
       fetch(
-        `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${
+        `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${
           this.songRef.current.value
         }&api_key=6a8466ca87081dca658c01c4452eb5a4&format=json`
       )
