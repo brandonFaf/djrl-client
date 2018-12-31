@@ -46,7 +46,6 @@ class Requests extends Component {
                                 </button>
                               )}
                             </li>
-                            <li>{played}</li>
                           </ul>
                         </li>
                       );
