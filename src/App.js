@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Requests from "./Components/Requests";
+import RequestList from "./Components/RequestList";
 import Search from "./Components/Search/Search";
 import { ViewContext } from "./Contexts/ViewStore";
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <div>
       <ViewContext.Consumer>
         {({ showSearch, toggleSearch }) =>
-          showSearch ? <Search /> : <Requests toggleSearch={toggleSearch} />
+          showSearch ? <Search /> : <RequestList toggleSearch={toggleSearch} />
         }
       </ViewContext.Consumer>
     </div>

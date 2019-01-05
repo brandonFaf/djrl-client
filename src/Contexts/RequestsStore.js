@@ -28,6 +28,7 @@ class RequestStore extends Component {
       });
   }
   upvote = (id, upvotes) => {
+    upvotes++;
     db.collection("Parties")
       .doc("hAlXTRnQLhPphs5OUsQ6")
       .collection("Requests")
