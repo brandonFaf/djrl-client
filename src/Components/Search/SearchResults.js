@@ -16,19 +16,26 @@ class SearchResults extends Component {
     });
   };
   render() {
-    console.log(this.props.results);
     return (
       <ul>
         <RequestsContext.Consumer>
           {({ upvote }) =>
             this.props.results
-              .filter(x => x.requested)
+              .filter(x => x.requested || x.played)
               .map(
-                ({ name, artist, image, id, upvotes, alreadyUpvoted }, i) => (
-                  <li key={i}>
+                ({
+                  name,
+                  artist,
+                  image,
+                  id,
+                  upvotes,
+                  played,
+                  alreadyUpvoted
+                }) => (
+                  <li key={id}>
                     <img alt={name} src={image[0]["#text"]} />
                     {name} - {artist} {upvotes}
-                    {!alreadyUpvoted && (
+                    {!alreadyUpvoted && !played && (
                       <button
                         style={{ marginLeft: 10 }}
                         onClick={() => upvote(id, ++upvotes)}
@@ -45,7 +52,7 @@ class SearchResults extends Component {
 
         <hr />
         {this.props.results
-          .filter(x => !x.requested)
+          .filter(x => !x.requested && !x.played)
           .map(({ name, artist, image }, i) => (
             <li key={i}>
               <img alt={name} src={image[0]["#text"]} />

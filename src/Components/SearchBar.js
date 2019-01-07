@@ -23,6 +23,7 @@ class SearchBar extends Component {
         .then(resp => resp.json())
         .then(data => {
           const results = data.results.trackmatches.track.map(x => {
+            const { requests } = this.props;
             const req = this.props.requests.find(
               r => r.title === x.name && r.artist === x.artist
             );
@@ -30,6 +31,7 @@ class SearchBar extends Component {
               x.requested = req.id;
               x.upvotes = req.upvotes;
               x.alreadyUpvoted = req.alreadyUpvoted;
+              x.played = req.played;
             }
             return x;
           });

@@ -20,6 +20,7 @@ class RequestList extends Component {
               {requests &&
                 requests
                   .sort((a, b) => b.upvotes - a.upvotes)
+                  .filter(x => !x.played)
                   .map(request => {
                     return (
                       <Request
