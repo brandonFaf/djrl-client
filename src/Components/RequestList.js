@@ -3,16 +3,12 @@ import { RequestsContext } from "../Contexts/RequestsStore";
 import Request from "./Request";
 class RequestList extends Component {
   state = {};
-
   render() {
     return (
       <div>
         <div>
-          <input
-            type="text"
-            onFocus={() => this.props.toggleSearch()}
-            ref={this.songRef}
-          />
+          <input type="text" onFocus={this.props.toggleSearch} />
+          <button onClick={this.props.logOut}>Leave Party</button>
         </div>
         <RequestsContext.Consumer>
           {({ requests, upvote }) => (

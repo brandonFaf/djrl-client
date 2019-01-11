@@ -9,15 +9,12 @@ class RequestStore extends Component {
     this.state = {
       requests: []
     };
-    this.requestsCollection = db
-      .collection("Parties")
-      .doc("hAlXTRnQLhPphs5OUsQ6")
-      .collection("Requests");
   }
 
   componentDidMount() {
+    const partyName = localStorage.getItem("partyName");
     db.collection("Parties")
-      .doc("hAlXTRnQLhPphs5OUsQ6")
+      .doc(partyName)
       .collection("Requests")
       .onSnapshot(snapshot => {
         const requests = handleDataChange(this.state.requests, snapshot);
@@ -29,8 +26,9 @@ class RequestStore extends Component {
   }
   upvote = (id, upvotes) => {
     upvotes++;
+    const partyName = localStorage.getItem("partyName");
     db.collection("Parties")
-      .doc("hAlXTRnQLhPphs5OUsQ6")
+      .doc(partyName)
       .collection("Requests")
       .doc(id)
       .update({

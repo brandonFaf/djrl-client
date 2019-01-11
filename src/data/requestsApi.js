@@ -31,9 +31,10 @@ const runReducer = (requests, change, userUpvotes) => {
   }
 };
 export const addRequest = (title, artist) => {
+  const partyName = localStorage.getItem("partyName");
   return db
     .collection("Parties")
-    .doc("hAlXTRnQLhPphs5OUsQ6")
+    .doc(partyName)
     .collection("Requests")
     .add({
       title,
