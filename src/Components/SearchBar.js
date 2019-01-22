@@ -43,10 +43,19 @@ class SearchBar extends Component {
       <ViewContext.Consumer>
         {({ toggleSearch }) => {
           return (
-            <div>
-              <input type="text" onChange={this.search} ref={this.songRef} />
+            <div className="search-bar">
+              <span role="img" aria-label="Request">
+                🔍
+              </span>
+              <input
+                className="search-bar-input"
+                type="text"
+                onChange={this.search}
+                ref={this.songRef}
+                placeholder="Request"
+              />
               <button type="button" onClick={toggleSearch}>
-                Close
+                X
               </button>
             </div>
           );

@@ -7,7 +7,7 @@ import LogInPage from "./Components/LogInPage";
 import RequestStore from "./Contexts/RequestsStore";
 const App = () => {
   return (
-    <div>
+    <div className="app">
       <ViewContext.Consumer>
         {({ showSearch, toggleSearch, loggedIn, setLoggedIn, logOut }) =>
           loggedIn ? (

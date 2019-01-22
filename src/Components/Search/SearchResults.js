@@ -36,13 +36,7 @@ class SearchResults extends Component {
                     <img alt={name} src={image[0]["#text"]} />
                     {name} - {artist} {upvotes}
                     {!alreadyUpvoted && !played && (
-                      <button
-                        style={{ marginLeft: 10 }}
-                        onClick={() => upvote(id, ++upvotes)}
-                      >
-                        {" "}
-                        ↑{" "}
-                      </button>
+                      <button onClick={() => upvote(id, ++upvotes)}> ↑ </button>
                     )}{" "}
                   </li>
                 )

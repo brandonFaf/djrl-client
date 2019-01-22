@@ -6,24 +6,15 @@ export default props => {
     upvote
   } = props;
   return (
-    <li>
-      <strong>
+    <div className="request">
+      <img alt="1" src="./1.jpg" />
+      <p>
         {title} - {artist}
-      </strong>
-      <ul>
-        <li>
-          {upvotes}
-          {!alreadyUpvoted && (
-            <button
-              style={{ marginLeft: 10 }}
-              onClick={() => upvote(id, upvotes)}
-            >
-              {" "}
-              ↑{" "}
-            </button>
-          )}
-        </li>
-      </ul>
-    </li>
+      </p>
+      <p>{upvotes}</p>
+      {!alreadyUpvoted && (
+        <button onClick={() => upvote(id, upvotes)}>^</button>
+      )}
+    </div>
   );
 };
