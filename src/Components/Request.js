@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaChevronUp } from "react-icons/fa";
 export default props => {
   const {
     request: { id, title, artist, upvotes, alreadyUpvoted },
@@ -11,9 +11,16 @@ export default props => {
       <p>
         {title} - {artist}
       </p>
-      <p>{upvotes}</p>
+
       {!alreadyUpvoted && (
-        <button onClick={() => upvote(id, upvotes)}>^</button>
+        <div>
+          <div className="upvote" onClick={() => upvote(id, upvotes)}>
+            <div className="upvote-icon">
+              <FaChevronUp />
+            </div>
+            {upvotes}
+          </div>
+        </div>
       )}
     </div>
   );
