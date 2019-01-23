@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { addRequest } from "../../data/requestsApi";
 import { RequestsContext } from "../../Contexts/RequestsStore";
+import SearchResultItem from "./SearchResultItem";
+import Request from "../Request";
 
 class SearchResults extends Component {
   submitSong = (name, artist) => {
@@ -17,46 +19,31 @@ class SearchResults extends Component {
   };
   render() {
     return (
-      <ul>
-        <RequestsContext.Consumer>
-          {({ upvote }) =>
-            this.props.results
-              .filter(x => x.requested || x.played)
-              .map(
-                ({
-                  name,
-                  artist,
-                  image,
-                  id,
-                  upvotes,
-                  played,
-                  alreadyUpvoted
-                }) => (
-                  <li key={id}>
-                    <img alt={name} src={image[0]["#text"]} />
-                    {name} - {artist} {upvotes}
-                    {!alreadyUpvoted && !played && (
-                      <button onClick={() => upvote(id, ++upvotes)}> ↑ </button>
-                    )}{" "}
-                  </li>
-                )
-              )
-          }
-        </RequestsContext.Consumer>
-
+      <>
+        <div>
+          <RequestsContext.Consumer>
+            {({ upvote }) =>
+              this.props.results
+                .filter(x => x.requested || x.played)
+                .map(result => (
+                  <SearchResultItem result={result} upvote={upvote} />
+                ))
+            }
+          </RequestsContext.Consumer>
+        </div>
         <hr />
-        {this.props.results
-          .filter(x => !x.requested && !x.played)
-          .map(({ name, artist, image }, i) => (
-            <li key={i}>
-              <img alt={name} src={image[0]["#text"]} />
-              {name} - {artist}{" "}
-              <button onClick={() => this.submitSong(name, artist)}>
-                ⊕ *add*
-              </button>
-            </li>
-          ))}
-      </ul>
+        <div className="requests">
+          {this.props.results
+            .filter(x => !x.requested && !x.played)
+            .map(({ name, artist, image }, i) => (
+              <Request
+                key={i}
+                request={{ title: name, artist, image: image[0]["#text"] }}
+                addSong={() => this.submitSong(name, artist)}
+              />
+            ))}
+        </div>
+      </>
     );
   }
 }

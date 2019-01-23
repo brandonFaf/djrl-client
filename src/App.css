@@ -18,12 +18,16 @@
   padding: 20px;
 }
 
+hr {
+  height: 1px;
+  background-color: #fff;
+}
+
 .request {
   display: grid;
   grid-template-columns: 50px 1fr 50px;
   grid-gap: 10px;
-  padding: 5px;
-  border-top: 1px solid black;
+  padding: 1px 5px;
   align-items: center;
 }
 .upvote {
@@ -39,8 +43,18 @@
 .upvote-icon {
   font-size: 15px;
 }
+.request-info h4 {
+  margin: 0;
+}
+.request-info p {
+  margin: 0;
+  font-size: 11px;
+}
+.add-button {
+  color: white;
+  font-size: 20px;
+}
 .request img {
-  border: solid 4px white;
   height: 50px;
 }
 .request-title {

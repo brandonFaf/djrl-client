@@ -1,20 +1,18 @@
 import React from "react";
-import { FaChevronUp, FaPlusCircle } from "react-icons/fa";
-import { MdAddCircleOutline } from "react-icons/md";
+import { FaChevronUp } from "react-icons/fa";
 export default props => {
   const {
-    request: { id, title, artist, upvotes, alreadyUpvoted, image },
-    upvote,
-    addSong
+    result: { name, artist, image, id, upvotes, played, alreadyUpvoted },
+    upvote
   } = props;
   return (
     <div className="request">
-      <img alt={title} src={image} />
+      <img alt={name} src={image[0]["#text"]} />
       <div className="request-info">
-        <h4>{title}</h4>
+        <h4>{name}</h4>
         <p>{artist}</p>
       </div>
-      {!alreadyUpvoted && upvote && (
+      {!alreadyUpvoted && !played && (
         <div>
           <div className="upvote" onClick={() => upvote(id, upvotes)}>
             <div className="upvote-icon">
@@ -23,11 +21,6 @@ export default props => {
             {upvotes}
           </div>
         </div>
-      )}
-      {addSong && (
-        <button className="add-button" onClick={addSong}>
-          <MdAddCircleOutline />
-        </button>
       )}
     </div>
   );
