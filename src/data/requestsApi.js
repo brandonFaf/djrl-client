@@ -30,7 +30,7 @@ const runReducer = (requests, change, userUpvotes) => {
       return null;
   }
 };
-export const addRequest = (title, artist) => {
+export const addRequest = (title, artist, image) => {
   const partyName = localStorage.getItem("partyName");
   return db
     .collection("Parties")
@@ -39,6 +39,7 @@ export const addRequest = (title, artist) => {
     .add({
       title,
       artist,
+      image,
       upvotes: 0,
       played: false,
       alreadyUpvoted: true,

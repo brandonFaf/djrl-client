@@ -32,6 +32,7 @@ class SearchBar extends Component {
               x.alreadyUpvoted = req.alreadyUpvoted;
               x.played = req.played;
             }
+            x.image = x.image[0]["#text"];
             return x;
           });
           this.props.setSearchResults(results);

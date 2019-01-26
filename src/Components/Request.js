@@ -1,9 +1,8 @@
 import React from "react";
 import { FaChevronUp, FaPlusCircle } from "react-icons/fa";
-import { MdAddCircleOutline } from "react-icons/md";
 export default props => {
   const {
-    request: { id, title, artist, upvotes, alreadyUpvoted, image },
+    request: { id, title, artist, upvotes, alreadyUpvoted, image, played },
     upvote,
     addSong
   } = props;
@@ -14,20 +13,21 @@ export default props => {
         <h4>{title}</h4>
         <p>{artist}</p>
       </div>
-      {!alreadyUpvoted && upvote && (
-        <div>
-          <div className="upvote" onClick={() => upvote(id, upvotes)}>
-            <div className="upvote-icon">
-              <FaChevronUp />
-            </div>
-            {upvotes}
-          </div>
-        </div>
-      )}
-      {addSong && (
+      {addSong ? (
         <button className="add-button" onClick={addSong}>
-          <MdAddCircleOutline />
+          <FaPlusCircle />
         </button>
+      ) : (
+        <div className="upvote">
+          {!alreadyUpvoted && !played && upvote && (
+            <div onClick={() => upvote(id, upvotes)}>
+              <div className="upvote-icon">
+                <FaChevronUp />
+              </div>
+            </div>
+          )}
+          {upvotes}
+        </div>
       )}
     </div>
   );
