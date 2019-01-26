@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { addRequest } from "../../data/requestsApi";
 import { RequestsContext } from "../../Contexts/RequestsStore";
-import SearchResultItem from "./SearchResultItem";
 import Request from "../Request";
 
 class SearchResults extends Component {
@@ -18,14 +17,18 @@ class SearchResults extends Component {
     });
   };
   render() {
+    const oldResults = this.props.results.filter(x => x.requested || x.played);
+    const newResults = this.props.results.filter(
+      x => !x.requested && !x.played
+    );
+
     return (
       <>
-        <div>
-          <RequestsContext.Consumer>
-            {({ upvote }) =>
-              this.props.results
-                .filter(x => x.requested || x.played)
-                .map((result, i) => (
+        {oldResults.length > 0 && (
+          <div>
+            <RequestsContext.Consumer>
+              {({ upvote }) =>
+                oldResults.map((result, i) => (
                   <Request
                     key={i}
                     request={{
@@ -36,21 +39,22 @@ class SearchResults extends Component {
                     upvote={upvote}
                   />
                 ))
-            }
-          </RequestsContext.Consumer>
-        </div>
-        <hr />
-        <div className="requests">
-          {this.props.results
-            .filter(x => !x.requested && !x.played)
-            .map(({ name, artist, image }, i) => (
+              }
+            </RequestsContext.Consumer>
+            <hr />
+          </div>
+        )}{" "}
+        {newResults.length > 0 && (
+          <div className="requests">
+            {newResults.map(({ name, artist, image }, i) => (
               <Request
                 key={i}
                 request={{ title: name, artist, image }}
                 addSong={() => this.submitSong(name, artist, image)}
               />
             ))}
-        </div>
+          </div>
+        )}
       </>
     );
   }
