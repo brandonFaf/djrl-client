@@ -26,7 +26,7 @@ export default props => {
               </div>
             </div>
           )}
-          {upvotes}
+          {played ? "Played" : upvotes}
         </div>
       )}
     </div>

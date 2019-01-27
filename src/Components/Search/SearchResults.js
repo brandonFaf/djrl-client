@@ -23,9 +23,10 @@ class SearchResults extends Component {
     );
 
     return (
-      <>
+      <div className="search">
         {oldResults.length > 0 && (
           <div>
+            <p className="request-title">In Voting</p>
             <RequestsContext.Consumer>
               {({ upvote }) =>
                 oldResults.map((result, i) => (
@@ -44,6 +45,7 @@ class SearchResults extends Component {
             <hr />
           </div>
         )}{" "}
+        <p className="request-title">Songs</p>
         {newResults.length > 0 && (
           <div className="requests">
             {newResults.map(({ name, artist, image }, i) => (
@@ -55,7 +57,7 @@ class SearchResults extends Component {
             ))}
           </div>
         )}
-      </>
+      </div>
     );
   }
 }

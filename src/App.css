@@ -2,9 +2,9 @@
   background: #303030;
   height: 100vh;
   display: grid;
+  grid-template-areas: "search-bar" "text" "requests";
   grid-template-rows: auto auto 1fr;
   align-items: start;
-  grid-gap: 10px;
   color: white;
 }
 .empty {
@@ -34,7 +34,6 @@ hr {
 .upvote {
   padding: 10px;
   font-size: 11px;
-  background: #303030;
   border: none;
   color: white;
   display: flex;
@@ -61,20 +60,23 @@ hr {
 .request-title {
   text-align: center;
   font-weight: bold;
-  font-size: larger;
-  margin: 0;
+  font-size: 18px;
+  margin: 10px;
 }
 .search-bar {
   display: grid;
   align-items: center;
   justify-items: center;
-  width: 100%;
   background: #484848;
   height: 35px;
-  border-bottom: solid 2px white;
+  border-bottom: solid 1px white;
   grid-template-areas: "icon text close";
   grid-template-columns: 20px 1fr 20px;
   grid-gap: 10px;
+  padding: 0 10px;
+}
+.search-bar.searching {
+  border-color: #42ff00;
 }
 .search-bar .placeholder {
   grid-area: text;
@@ -86,4 +88,18 @@ hr {
   background: #484848;
   border: none;
   outline: none;
+}
+.search {
+  height: 100%;
+  mix-blend-mode: normal;
+  opacity: 0.8;
+  width: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  grid-area: requests;
 }
